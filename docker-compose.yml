@@ -1,0 +1,11 @@
+version: "3"
+services:
+  client:
+    image: client
+    stdin_open: true
+    ports:
+      - "3000:3000"
+  server:
+    image: server
+    ports:
+      - "8080:8080"
