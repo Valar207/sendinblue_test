@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const bodyparser = require("body-parser");
 const port = process.env.port || 8080;
 const axios = require("axios");
 const app = express();
@@ -11,7 +10,6 @@ app.use(
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   })
 );
-app.use(bodyparser.json());
 
 app.listen(port, (err) => {
   if (err) {
@@ -26,7 +24,7 @@ const site = "sendinblue";
 
 const api_url = "https://api.lever.co/v0/postings";
 
-app.get("/sendinblue", async (req, res) => {
+app.get("/allJobs", async (req, res) => {
   try {
     const url = `${api_url}/${site}?mode=${mode}&group=${group}`;
     const fetch = await axios.get(url);

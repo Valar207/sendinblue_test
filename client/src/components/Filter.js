@@ -1,21 +1,11 @@
 import React, { useContext } from "react";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import "../styles/react-select-search.css";
-import { Dropdown, DropdownButton, FormControl } from "react-bootstrap";
 import { UserContext } from "../MyContext";
 
 import SelectSearch from "react-select-search";
 
 export default function Filter() {
-  //   const options = [
-  //     { name: "Swedish", value: "sv" },
-  //     { name: "English", value: "en" },
-  //   ];
-
   const state = useContext(UserContext);
-  console.log(state);
-
   const { allFilters, filteredInfos, setFilteredInfos, nbJobs } = state;
 
   const options = {
@@ -24,9 +14,9 @@ export default function Filter() {
     jobTypes: [{ name: "All", value: "" }],
   };
 
-  allFilters.locations.map((l) => options.locations.push({ name: l, value: l }));
-  allFilters.departments.map((d) => options.departments.push({ name: d, value: d }));
-  allFilters.jobTypes.map((t) => options.jobTypes.push({ name: t, value: t }));
+  allFilters.locations.forEach((l) => options.locations.push({ name: l, value: l }));
+  allFilters.departments.forEach((d) => options.departments.push({ name: d, value: d }));
+  allFilters.jobTypes.forEach((t) => options.jobTypes.push({ name: t, value: t }));
 
   const locationChange = (value) => {
     setFilteredInfos({ ...filteredInfos, location: value });

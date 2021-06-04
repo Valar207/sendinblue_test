@@ -1,6 +1,5 @@
 import React from "react";
 import Jobs from "../components/Jobs";
-import { Dropdown } from "react-bootstrap";
 
 export default function Departments({ department }) {
   const { title, postings } = department;

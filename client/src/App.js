@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./styles/App.css";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
@@ -21,10 +20,6 @@ function App() {
     jobTypes: [],
   });
   const [nbJobs, setNbJobs] = useState(0);
-  var tmpLo = [];
-  var tmpTypes = [];
-  var tmpDep = [];
-  var countJob = 0;
 
   const [filteredInfos, setFilteredInfos] = useState({
     location: "",
@@ -33,18 +28,24 @@ function App() {
   });
 
   useEffect(() => {
-    if (filteredInfos.location == "" && filteredInfos.department == "" && filteredInfos.jobType == "") {
+    var tmpLo = [];
+    var tmpTypes = [];
+    var tmpDep = [];
+    var countJob = 0;
+    if (filteredInfos.location === "" && filteredInfos.department === "" && filteredInfos.jobType === "") {
       axios
-        .get("/sendinblue")
+        .get("/allJobs")
         .then((res) => {
           //get all Locations, all Types and all departments for filtering
-          res.data.map((el) => {
+
+          res.data.forEach((el) => {
             if (el.title) tmpDep.push(el.title);
-            el.postings.map((l) => {
+            el.postings.forEach((l) => {
               tmpLo.push(l.categories.location);
               tmpTypes.push(l.categories.commitment);
             });
           });
+
           tmpLo = tmpLo.filter((item, index) => tmpLo.indexOf(item) === index);
           tmpTypes = tmpTypes.filter((item, index) => tmpTypes.indexOf(item) === index).filter((x) => x !== undefined);
 
@@ -55,7 +56,7 @@ function App() {
           });
 
           //number of job found
-          res.data.map((el) => el.postings.map((j) => countJob++));
+          res.data.forEach((el) => el.postings.forEach((j) => countJob++));
           setNbJobs(countJob);
 
           //All job infos before filtering
@@ -73,7 +74,7 @@ function App() {
         })
         .then((res) => {
           //number of job found
-          res.data.map((el) => el.postings.map((j) => countJob++));
+          res.data.forEach((el) => el.postings.forEach((j) => countJob++));
           setNbJobs(countJob);
           //all jobs with filter
           setAllInfos(res.data);

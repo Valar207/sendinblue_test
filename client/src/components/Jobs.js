@@ -12,7 +12,7 @@ export default function Jobs({ job }) {
       </div>
       <p className="commitment">{job.categories.commitment}</p>
 
-      <a className="apply" target="_blank" href={job.hostedUrl}>
+      <a className="apply" target="_blank" rel="noopener noreferrer" href={job.hostedUrl}>
         Apply
       </a>
     </div>
