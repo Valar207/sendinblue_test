@@ -37,8 +37,6 @@ function App() {
       axios
         .get("/sendinblue")
         .then((res) => {
-          console.log(res.data);
-
           //get all Locations, all Types and all departments for filtering
           res.data.map((el) => {
             if (el.title) tmpDep.push(el.title);
@@ -74,7 +72,6 @@ function App() {
           params: filteredInfos,
         })
         .then((res) => {
-          console.log(res);
           //number of job found
           res.data.map((el) => el.postings.map((j) => countJob++));
           setNbJobs(countJob);

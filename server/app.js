@@ -39,8 +39,6 @@ app.get("/sendinblue", async (req, res) => {
 
 app.get("/filter", async (req, res) => {
   const { location, department, jobType } = req.query;
-  console.log(department);
-
   try {
     const url = `${api_url}/${site}?mode=${mode}&group=${group}&location=${location}&commitment=${jobType}&department=${department}`;
     const fetch = await axios.get(url);
